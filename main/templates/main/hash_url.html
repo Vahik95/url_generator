@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <ul class="navbar-nav navbar-right">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'main:hash_url' %}">Generator</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'main:check' %}">Check</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        <form method="POST" action="{% url 'main:hash_url' %}">
+            {% csrf_token %}
+            {% if request.GET.next %}
+            <input type="hidden" name="next" value={{ request.GET.next }}>
+            {% endif %}
+            <div class="input-group mb-3" style="padding-top:15px;">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">URL : </span>
+                </div>
+                <input type="text" class="form-control form-control-lg" placeholder="Input the url"
+                       name="url">
+            </div>
+            <button type="submit" class="btn-lg btn-dark btn-block">Generate</button>
+        </form>
+        {% if url %}
+        <div class="jumbotron">
+            <h2>The url generated successfully!</h2>
+            <h3>{{url}}</h3>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
