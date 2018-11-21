@@ -8,7 +8,7 @@ def hash_url(request):
         if request.POST['url']:
             url = request.POST['url']
             identifier = str(random.randint(1, 10000000000000))
-            new_url = '127.0.0.1:8000/main/hash_url_redirect/' + identifier
+            new_url = 'https://pacific-ocean-74936.herokuapp.com/main/hash_url/' + identifier
             urls = Urls()
             urls.url = url
             urls.identifier = identifier
