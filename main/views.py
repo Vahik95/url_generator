@@ -16,6 +16,8 @@ def hash_url(request):
             urls.save()
 
             return render(request, 'main/hash_url.html', {'url': new_url})
+        else:
+            return render(request, 'main/check.html', {'error': 'Please input something!!!'})
     else:
         return render(request, 'main/hash_url.html')
 
@@ -27,6 +29,8 @@ def check(request):
             if Urls.objects.get(identifier=url[-13:]):
                 urls = Urls.objects.get(identifier=url[-13:])
                 return render(request, 'main/check.html', {'url': urls})
+            else:
+                return render(request, 'main/check.html', {'error': 'URL does not exist!!!'})
         else:
             return render(request, 'main/check.html', {'error': 'Please input something!!!'})
     else:
